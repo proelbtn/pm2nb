@@ -117,7 +117,7 @@ func syncVirtualMachines(pm *proxmox.Client, nb *netbox.Client, pvms []proxmox.V
 	}
 
 	// 1. Create Virtual Machine found in Proxmox, but not found in NetBox
-	for _, pvm := range pvms {
+	for _, pvm := range name2pvm {
 		if _, ok := name2nvm[pvm.Name]; !ok {
 			vm, err := nb.CreateVirtualMachine(ctx, pvm.Name, 1)
 			if err != nil {
@@ -130,7 +130,7 @@ func syncVirtualMachines(pm *proxmox.Client, nb *netbox.Client, pvms []proxmox.V
 	}
 
 	// 2. Delete Virtual Machine found in NetBox, but not found in Proxmox
-	for _, nvm := range nvms {
+	for _, nvm := range name2nvm {
 		if _, ok := name2pvm[nvm.Name]; !ok {
 			err := nb.DeleteVirtualMachine(ctx, nvm.Id)
 			if err != nil {
@@ -147,6 +147,7 @@ func syncVirtualMachines(pm *proxmox.Client, nb *netbox.Client, pvms []proxmox.V
 		pvm := name2pvm[nvm.Name]
 		nvm.Cpu = pvm.MaxCpu
 		nvm.Memory = pvm.MaxMem / 1024 / 1024
+		nvm.Disk = pvm.MaxDisk / 1024 / 1024 / 1024
 		nvm.Status.Value = netbox.StatusOffline
 		if pvm.Status == proxmox.StatusRunning {
 			nvm.Status.Value = netbox.StatusActive

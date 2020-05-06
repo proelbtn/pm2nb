@@ -32,6 +32,7 @@ type VirtualMachine struct {
 	Mem int64 `json:"mem"`
 	MaxCpu int64 `json:"cpus"`
 	MaxMem int64 `json:"maxmem"`
+	MaxDisk int64 `json:"maxdisk"`
 	DiskRead int64 `json:"diskread"`
 	DiskWrite int64 `json:"diskwrite"`
 	NetIn int64 `json:"netin"`

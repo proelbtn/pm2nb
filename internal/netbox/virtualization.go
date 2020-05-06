@@ -82,6 +82,7 @@ func (c *Client) PatchVirtualMachine(ctx context.Context, machine VirtualMachine
 		"cluster": machine.Cluster.Id,
 		"vcpus": machine.Cpu,
 		"memory": machine.Memory,
+		"disk": machine.Disk,
 	}, &data)
 	if err != nil {
 		return nil, err
