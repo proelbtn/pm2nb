@@ -40,6 +40,12 @@ type VirtualMachine struct {
 	Interfaces []NetworkInterface
 }
 
+const (
+	StatusRunning = "running"
+	StatusStopped = "stopped"
+)
+
+
 type NetworkInterface struct {
 	Name string
 	MACAddress string
