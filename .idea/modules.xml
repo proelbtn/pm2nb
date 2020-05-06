@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/proxmox2netbox.iml" filepath="$PROJECT_DIR$/.idea/proxmox2netbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pm2nb.iml" filepath="$PROJECT_DIR$/.idea/pm2nb.iml" />
     </modules>
   </component>
 </project>
