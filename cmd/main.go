@@ -7,6 +7,7 @@ import (
 	"github.com/proelbtn/proxmox2netbox/internal/netbox"
 	"github.com/proelbtn/proxmox2netbox/internal/proxmox"
 	"os"
+	"strconv"
 )
 
 type Parameter struct {
@@ -108,7 +109,11 @@ func syncVirtualMachines(pm *proxmox.Client, nb *netbox.Client, pvms []proxmox.V
 
 	name2pvm := make(map[string]proxmox.VirtualMachine)
 	for _, pvm := range pvms {
-		name2pvm[pvm.Name] = pvm
+		// Machines whose id >= 10000 is template virtual machine
+		id, _ := strconv.Atoi(pvm.Id)
+		if id < 10000 {
+			name2pvm[pvm.Name] = pvm
+		}
 	}
 
 	name2nvm := make(map[string]netbox.VirtualMachine)
